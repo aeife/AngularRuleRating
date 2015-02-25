@@ -3,8 +3,11 @@
 <head>
     <title>Rating</title>
 </head>
-<body ng-app="ratingApp">
-    <rating></rating>
+<body ng-app="ratingApp" ng-controller="RatingAppCtrl">
+    <input type="text" ng-model="testmodel.name">
+    <input type="text" ng-model="testmodel.height">
+
+    <rating ng-model="testmodel"></rating>
 
     <script type="text/javascript" src="bower_components/angularjs/angular.min.js"></script>
     <script type="text/javascript" src="app/app.js"></script>
