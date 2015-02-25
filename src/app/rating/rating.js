@@ -13,11 +13,14 @@ angular.module('rating', [])
     .controller('RatingCtrl', function ($scope) {
         var calculateOverallRating = function (rules, model) {
             var result = 0;
+            var weightCount = 0;
 
             rules.forEach(function (rule) {
-                result += rule(model).rating;
+                var ruleResult = rule(model);
+                result += ruleResult.rating * (ruleResult.weight || 1);
+                weightCount += ruleResult.weight || 1;
             });
-            result = result / rules.length;
+            result = result / weightCount;
 
             return result;
         };
@@ -48,7 +51,7 @@ angular.module('rating', [])
                     rating = 0.2;
                 }
 
-                return {rating: rating};
+                return {rating: rating, weight: 2};
             }
         ];
 
@@ -58,7 +61,6 @@ angular.module('rating', [])
         };
 
         $scope.$watch('ngModel', function () {
-            console.log("run");
             $scope.RatingCtrl.rating = calculateOverallRating(rules, $scope.ngModel) * $scope.RatingCtrl.max;
         }, true);
     });
