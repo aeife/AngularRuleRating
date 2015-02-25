@@ -5,7 +5,8 @@ angular.module('rating', [])
             templateUrl: '/app/rating/rating.html',
             scope: {
                 ngModel: '=',
-                rules: '='
+                rules: '=',
+                max: '=?'
             },
             controller: 'RatingCtrl'
         }
@@ -26,7 +27,7 @@ angular.module('rating', [])
         };
 
         $scope.RatingCtrl = {
-            max: 10,
+            max: $scope.max || 10,
             rating: 0
         };
 
